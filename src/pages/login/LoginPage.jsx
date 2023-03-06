@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { Button, Input, Form, Row, Col } from 'antd';
+import { Button, Input, Form, Row, Col, Image } from 'antd';
 import { startLogin } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import "../../styles/login.scss";
@@ -20,7 +20,7 @@ export const LoginPage = () => {
     return (
         <div className='LoginContainter'>
             <div className='LoginImg'>
-                hola
+                .
             </div>
             <div className='LoginForm'>
                 <Form
@@ -37,6 +37,9 @@ export const LoginPage = () => {
                 >
               
                         <Row>
+                            <Col span={24} className='LoginFormat'>
+                                <h1>Iniciar Sesión</h1>
+                            </Col>
                             <Col span={24} className='LoginFormat'>
                                 <Form.Item label="Email" name="email" className='LoginInput'>
                                     <Input allowClear={true}/>

@@ -46,6 +46,20 @@ export const startLogin = createAsyncThunk("authSlice/userAuth",
     }
 );
 
+export const startLogout = createAsyncThunk("authSlice/userRefreshAuth",
+  async (thunkAPI) => {
+    axios.defaults.headers["authorization"] = 'Bearer '+localStorage.getItem('token'); 
+    let token = localStorage.getItem("token_bearer");
+    return axios.post(`/logout`, {}).then(function (response) {
+      if (response.statusText === "OK") {
+        return Swal.fire("Success", "Sesión finalizada", "success");
+      }
+    }).catch(function (error) {
+      return thunkAPI.rejectWithValue({ error: error });
+    });
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState: inicialState,
@@ -70,6 +84,22 @@ export const authSlice = createSlice({
       state["checking"] = true;
       state["loading"] = false;
       state["renderComponentLogin"] = true;
+    },
+
+    [startLogout.fulfilled.type]: (state, action) => {
+      state["id"] = null;
+      state["unique_id"] = null
+      state["name"] = null
+      state['lastName'] = null
+      state['email'] = null
+      state['state'] = null
+      state['token'] = null
+      state['init'] =  null
+      state['expired'] =  null
+      state["checking"] = false;
+      state["loading"] = false;
+      state["renderComponentLogin"] = true;
+      localStorage.clear();
     },
  
   },

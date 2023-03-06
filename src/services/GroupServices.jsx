@@ -3,6 +3,7 @@ import axios from "axios";
 const GroupService = {
    
     Create: (params) => {
+      axios.defaults.headers["authorization"] = 'Bearer '+localStorage.getItem('token'); 
         return new Promise((resolve, reject) => {
             axios.post(`/groups/create`, params)
             .then(function (response) {
@@ -15,6 +16,7 @@ const GroupService = {
     },
 
     FindAll: (params) => {
+      axios.defaults.headers["authorization"] = 'Bearer '+localStorage.getItem('token'); 
         return new Promise((resolve, reject) => {
             axios.post(`/groups/findAll`, params)
             .then(function (response) {
